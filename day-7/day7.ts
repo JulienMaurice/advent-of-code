@@ -1,8 +1,16 @@
-const data = "16,1,2,0,4,2,7,1,2,14";
+const data = await Deno.readTextFile('./day-7/data.txt');
 
 const positions = data
 	.split(',')
 	.map(Number)
 	.sort((a,b)=>a-b);
 
-console.log(positions);
+const meetingPoint = positions[Math.floor(positions.length / 2)];
+
+const fuelCost = positions
+	.map(pos=>Math.abs(pos - meetingPoint))
+	.reduce((a,b) => a + b, 0);
+
+console.log(fuelCost)
+
+
